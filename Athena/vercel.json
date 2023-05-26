@@ -1,17 +1,15 @@
 {
-
-    "build":[
-        {
-            "src":"Athena/wsgi.py",
-            "use": "@vercel/python",
-            "conf":{"maxLambdaSize":"15mn","runtime":"python3.11.2"}
-        }
-    ],
-    "routes":[
-
-        {
-            "src":"/(.*)",
-            "dest":"Athena/wsgi.py"
-        }
-    ]
+  "version": 3,
+  "builds": [
+    {
+      "src": "Athena/manage.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "Athena/manage.py"
+    }
+  ]
 }
