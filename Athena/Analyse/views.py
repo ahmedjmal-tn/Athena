@@ -133,7 +133,6 @@ def crypto_data_view(request):
 # Calculate the accuracy of the model using mean squared error
         mse = mean_squared_error(y_test, y_pred)
         accuracy = 1 - (mse / y_test.var())
-        print(accuracy)
 
 
 # Get the last row of data

@@ -14,7 +14,6 @@ class Subscription(models.Model):
     def str(self):
         return f"{self.user.username} - Subscription"
 
-subscribre_group, created = Group.objects.get_or_create(name='Subscriber')
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -24,3 +23,5 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+subscribre_group, created = Group.objects.get_or_create(name='Subscriber')

@@ -17,7 +17,7 @@ driver.get("https://www.coingecko.com/fr/all-cryptocurrencies")
 time.sleep(5)
 
 # Create a directory to store the scraped files
-directory = "AnalyseScrapp/scraped_data"
+directory = "Athena/AnalyseScrapp/scraped_data"
 if not os.path.exists(directory):
     os.makedirs(directory)
 
@@ -92,8 +92,8 @@ import csv
 import pandas as pd
 import numpy as np
 
-directory = "AnalyseScrapp/scraped_data"
-cleaned_directory = "AnalyseScrapp/clean"
+directory = "Athena/AnalyseScrapp/scraped_data"
+cleaned_directory = "Athena/AnalyseScrapp/clean"
 
 # Vérifier si le dossier "clean" existe, sinon le créer
 if not os.path.exists(cleaned_directory):

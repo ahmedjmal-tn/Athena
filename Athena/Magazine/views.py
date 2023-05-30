@@ -17,6 +17,8 @@ def Home(request):
     ).order_by("-published")[:3]
     article_series = ArticleSeries.objects.all()
     series_articles = []
+    latest_articles = []  # Declare latest_articles outside the loop
+
     for series in article_series:
         latest_articles = series.article_set.filter(
             etat="accepted", published__lte=timezone.now()
@@ -34,13 +36,12 @@ def Home(request):
         "Magazine/home.html",
         {
             "latest_article": latest_article,
-            "latest_articles": latest_articles,
+            "latest_articles": latest_articles,  # Use the updated latest_articles variable
             "article_series": article_series,
             "page_obj": page_obj,
             "series_articles": series_articles,
         },
     )
-
 
 def category_page(request, slug):
     series = get_object_or_404(ArticleSeries, slug=slug)
