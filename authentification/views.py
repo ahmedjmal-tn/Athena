@@ -5,13 +5,15 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from .my_captcha import FormWithCaptcha
+
 from django.views.decorators.cache import never_cache
 from Article.models import Article
 from Magazine.views import Home
 
 
 import random
+
+
 
 def generate_username(name, fname):
     """Generate a unique username based on the name and first name."""
@@ -54,22 +56,21 @@ def sign_in_or_up(request):
         elif 'signin' in request.POST:
             email = request.POST.get('email')
             password = request.POST.get('password')
-            form = FormWithCaptcha(request.POST)
-            if form.is_valid():
-                user = authenticate(request=request, email=email, password=password, backend='Athena.backends.EmailBackend')
-                if user is not None:
+            
+    
+            user = authenticate(request=request, email=email, password=password, backend='Athena.backends.EmailBackend')
+            if user is not None:
                     login(request, user)
                     return redirect('Home')
-                else:
-                    messages.error(request, "Username or password is incorrect. Please try again.")
-                    form = FormWithCaptcha(request.POST)
+
+                  
             else:
                 messages.error(request, "Invalid reCAPTCHA. Please try again.")
-                return render(request, 'sign.html', {"captcha": form,
+                return render(request, 'sign.html', {
                                                       "signin_error": messages.get_messages(request),"signup_error": messages.get_messages(request)})
     # Render the sign-in/sign-up page
-    form = FormWithCaptcha()
-    return render(request, 'sign.html', {"captcha": form})
+
+    return render(request, 'sign.html')
 
 @login_required
 @never_cache
@@ -133,3 +134,5 @@ def verify(request):
             return render(request, 'verification.html', {'email': request.session.get('email')})
     # Render the verification page
     return render(request, 'verification.html', {'email': request.session.get('email')})
+def custom_404(request, exception):
+    return render(request, '404.html', status=404)
