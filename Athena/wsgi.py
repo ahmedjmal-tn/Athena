@@ -17,7 +17,6 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Athena.settings')
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 application = get_wsgi_application()
 application = WhiteNoise(application, root=os.path.join(BASE_DIR, 'Athena/static'))
-application.add_files(os.path.join(BASE_DIR, 'path/to/more/static/files'), prefix='more-files/')
-application.add_files(os.path.join(BASE_DIR, 'media/'), prefix='media/')
+application.add_files(settings.MEDIA_ROOT, prefix=settings.MEDIA_URL)
 
 
